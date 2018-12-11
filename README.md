@@ -9,4 +9,4 @@ Back in your terminal, export the Slack token with the name SLACK_BOT_TOKEN:
 
 ```export SLACK_BOT_TOKEN='your bot user access token here'```
 
-Run our Starter Bot on the command line with the "python main.py" command.
+Run the Bot on the command line with the ```python main.py``` command.
