@@ -7,6 +7,7 @@ from slackclient import SlackClient
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 bot_id = None
 
+
 # consts
 RTM_READ_DELAY = 1
 MENTION_REGEX = "^<@(|[WU].+?)>(.*)"
@@ -31,15 +32,21 @@ def parse_direct_mention(messageText):
 
 def handle_command(command, channel):
     default_response = "What? Quack."
+    command_lower = command.lower()
+    response = None
+
+    command_dictionary = {
+        "commands": "You can use the following commands \"command\", \"help\", \"hello\", \"bye\".",
+        "help": "Tell me your problems... quack",
+        "hello": "Hellquack",
+        "bye": "K bye... :("
+
+    }
 
     # find and executes commands
-    response = None
-    if command == "commands":
-        response = "You can use the following commands \"command\", \"help\", \"bye\"."
-    elif command == "help":
-        response = "Tell me your problem... quack"
-    elif command == "bye":
-        response = "K bye... :("
+
+    if command_lower in command_dictionary:
+        response = command_dictionary[command_lower]
 
     slack_client.api_call("chat.postMessage",
                          channel=channel,
